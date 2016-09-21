@@ -1,0 +1,9 @@
+#AuthType Basic
+#AuthName CualquierTextoAleatorio
+#AuthUserFile /home/cutsa/public_html/dev/dojo/.htpasswd
+#require user dojoweb
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
