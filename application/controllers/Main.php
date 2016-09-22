@@ -144,6 +144,10 @@ class Main extends CI_Controller {
             ->display_as('enfermedad',     'Enfermedad')
             ->display_as('alergicoa',      'Alergico a');
 
+        $crud->field_type('cod_dojo','invisible');
+        $crud->field_type('sec_dojo','invisible');
+
+
         $crud->set_relation('id_dojo','dojos','nombre');
 
 
