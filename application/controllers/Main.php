@@ -150,11 +150,23 @@ class Main extends CI_Controller {
         //$crud->set_relation('salesRepEmployeeNumber','employees','lastName');
         $crud->set_subject('Miembro');
 
-        $crud->callback_before_insert(array($this,'check_dojo'));
+        //$crud->callback_before_insert(array($this,'check_dojo'));
+
+        $crud->callback_insert(array($this,'numero_miembro'));
 
         $output = $crud->render();
         $this->_example_output($output);
     }
+
+    function numero_miembro($post_array) {
+
+        $post_array["cod_dojo"]=$this->Dojo_model->get_cod_dojo($post_array["id_dojo"]);
+        $post_array["sec_dojo"]=$this->Dojo_model->get_sec_dojo($post_array["id_dojo"]);
+        $post_array["codmiembro"]=$post_array["cod_dojo"].str_pad($post_array["sec_dojo"],3,0,STR_PAD_LEFT);
+
+        return $this->db->insert('miembros',$post_array);
+    }
+
 
     function check_dojo($var)
     {
