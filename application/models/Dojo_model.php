@@ -7,7 +7,7 @@ class Dojo_model extends Grocery_crud_model  {
         parent::__construct();
     }*/
 
-    function get_list() {
+    function listar() {
         $query = $this->db->select('codmiembro')
                             ->like('codmiembro', 'ABPAPA', 'after')
                             ->order_by('codmiembro', 'DESC')

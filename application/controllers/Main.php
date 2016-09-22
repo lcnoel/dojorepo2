@@ -106,13 +106,13 @@ class Main extends CI_Controller {
 
         $crud->set_model('Dojo_model');              // ------------ AGREGADO ------------ //
         $crud->set_table('miembros');
-        $crud->columns('codmiembro','nombre','apellido','dojo','cargo','fechaingreso', 'estado');
+        $crud->columns('codmiembro','nombre','apellido','id_dojo','cargo','fechaingreso', 'estado');
         //$crud->columns('customerName','contactLastName','phone','city','country','salesRepEmployeeNumber','creditLimit');
         $crud->display_as('codmiembro',      'Código de Miembro')
             ->display_as('nombre',         'Nombre')
             ->display_as('apellido',       'Apellido')
             ->display_as('nummovil',       'Núm Móvil')
-            ->display_as('dojo',           'Dojo')
+            ->display_as('id_dojo',           'Dojo')
             ->display_as('estado',         'Estado')
             ->display_as('fechaingreso',   'Fecha de Ingreso')
             ->display_as('fechareingreso', 'Fecha de Reingreso')
@@ -143,6 +143,9 @@ class Main extends CI_Controller {
             ->display_as('tiposangre',     'Tipo de Sangre')
             ->display_as('enfermedad',     'Enfermedad')
             ->display_as('alergicoa',      'Alergico a');
+
+        $crud->set_relation('id_dojo','dojos','nombre');
+
 
         //$crud->set_relation('salesRepEmployeeNumber','employees','lastName');
         $crud->set_subject('Miembro');
