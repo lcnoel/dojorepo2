@@ -126,6 +126,8 @@ class Main extends CI_Controller {
             ->display_as('1kyu',           '1 Kyu')
             ->display_as('1dan',           '1 Dan')
             ->display_as('2dan',           '2 Dan')
+            ->display_as('3dan',           '3 Dan')
+            ->display_as('4dan',           '4 Dan')
             ->display_as('aikikai',        'Aikikai #')
             ->display_as('registration',   'Registration #')
             ->display_as('numoficina',     'Núm Oficina')
