@@ -165,6 +165,7 @@ class Main extends CI_Controller {
         //$crud->callback_before_insert(array($this,'check_dojo'));
 
         $crud->callback_insert(array($this,'numero_miembro'));
+        $crud->callback_column('codmiembro',array($this,'ninos'));
 
         $output = $crud->render();
         $this->_example_output($output);
@@ -177,6 +178,21 @@ class Main extends CI_Controller {
         $post_array["codmiembro"]=$post_array["cod_dojo"].str_pad($post_array["sec_dojo"],3,0,STR_PAD_LEFT);
 
         return $this->db->insert('miembros',$post_array);
+    }
+
+    function ninos($value, $row) {
+
+        $bday = new DateTime($row->fechanac);
+        $today = new DateTime();
+        $diff = $today->diff($bday);
+
+        if($diff->y<=18){
+            return $row->codmiembro."-N";
+        }
+        else{
+            return $row->codmiembro;
+        }
+
     }
 
 
