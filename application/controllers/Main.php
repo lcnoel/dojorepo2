@@ -186,7 +186,7 @@ class Main extends CI_Controller {
         $today = new DateTime();
         $diff = $today->diff($bday);
 
-        if($diff->y<=18){
+        if($diff->y<12){
             return $row->codmiembro."-N";
         }
         else{
