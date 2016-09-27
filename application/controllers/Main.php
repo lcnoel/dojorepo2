@@ -106,7 +106,7 @@ class Main extends CI_Controller {
 
         $crud->set_model('Dojo_model');              // ------------ AGREGADO ------------ //
         $crud->set_table('miembros');
-        $crud->columns('codmiembro','nombre','apellido','id_dojo','cargo','fechaingreso', 'estado');
+        $crud->columns('codmiembro','nombre','apellido','id_dojo','cargo','fechaingreso', '1kyu', 'estado');
         //$crud->columns('customerName','contactLastName','phone','city','country','salesRepEmployeeNumber','creditLimit');
         $crud->display_as('codmiembro',      'Código de Miembro')
             ->display_as('nombre',         'Nombre')
@@ -129,7 +129,7 @@ class Main extends CI_Controller {
             ->display_as('4kyu',           '4 Kyu')
             ->display_as('3kyu',           '3 Kyu')
             ->display_as('2kyu',           '2 Kyu')
-            ->display_as('1kyu',           '1 Kyu')
+            ->display_as('1kyu',           'Grado')
             ->display_as('1dan',           '1 Dan')
             ->display_as('2dan',           '2 Dan')
             ->display_as('3dan',           '3 Dan')
@@ -166,6 +166,7 @@ class Main extends CI_Controller {
 
         $crud->callback_insert(array($this,'numero_miembro'));
         $crud->callback_column('codmiembro',array($this,'ninos'));
+        $crud->callback_column('1kyu',array($this,'grado'));
 
         $output = $crud->render();
         $this->_example_output($output);
@@ -191,6 +192,39 @@ class Main extends CI_Controller {
         }
         else{
             return $row->codmiembro;
+        }
+
+    }
+
+    function grado($value, $row) {
+
+        $grados=array(
+            "12 Kyu" => $row->{'12kyu'},
+            "11 Kyu" => $row->{'11kyu'},
+            "10 Kyu" => $row->{'10kyu'},
+            "9 Kyu" => $row->{'9kyu'},
+            "8 Kyu" => $row->{'8kyu'},
+            "7 Kyu" => $row->{'7kyu'},
+            "6 Kyu" => $row->{'6kyu'},
+            "5 Kyu" => $row->{'5kyu'},
+            "4 Kyu" => $row->{'4kyu'},
+            "3 Kyu" => $row->{'3kyu'},
+            "2 Kyu" => $row->{'2kyu'},
+            "1 Kyu" => $row->{'1kyu'},
+            "1 Dan" => $row->{'1dan'},
+            "2 Dan" => $row->{'2dan'},
+            "3 Dan" => $row->{'3dan'},
+            "4 Dan" => $row->{'4dan'}
+        );
+
+        asort($grados);
+        end($grados);
+
+        if(end($grados)=="0000-00-00"){
+            return "NA";
+        }
+        else{
+            return key($grados)." (".end($grados).")";
         }
 
     }
